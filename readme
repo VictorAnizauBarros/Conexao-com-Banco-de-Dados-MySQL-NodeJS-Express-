@@ -1,0 +1,55 @@
+
+---
+
+### Resumo de Conexão com o Banco de Dados MySQL (NodeJS + Express)
+
+#### 1° Passo: Instalação do MySQL2
+Para instalar o pacote `mysql2`, execute o comando no terminal:
+```bash
+npm install mysql2
+```
+
+#### 2° Passo: Importar o MySQL2 no Projeto
+No arquivo `index.js` do projeto, instancie o `mysql2`:
+```javascript
+const mysql = require('mysql2');
+```
+
+#### 3° Passo: Criar a Conexão com o Banco de Dados
+Configure a conexão com as informações do seu banco de dados:
+```javascript
+const db = mysql.createConnection({
+  host: "localhost",     // Para um banco de dados rodando localmente
+  user: "SEU_USUARIO",   // Substitua por seu usuário do banco
+  password: "SUA_SENHA", // Substitua pela sua senha do banco
+  database: "NOME_DO_SEU_BD" // Nome do seu banco de dados
+});
+```
+
+#### 4° Passo: Conectar ao Banco de Dados
+
+**Primeira forma (callback):**
+```javascript
+db.connect((err) => {
+  if (err) throw err;
+  console.log("Conectado ao banco de dados com sucesso");
+});
+```
+
+**Segunda forma (async/await):**
+```javascript
+const connectToDatabase = async () => {
+  try {
+    await db.connect();
+    console.log("Conectado ao banco com sucesso.");
+  } catch (error) {
+    console.log("Erro ao conectar com o banco de dados:", error);
+  }
+};
+
+connectToDatabase();
+```
+
+---
+
+Esses são os passos principais para configurar uma conexão MySQL usando Node.js.
